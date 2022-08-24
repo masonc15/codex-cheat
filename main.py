@@ -1,8 +1,17 @@
 import os
 import openai
+import argparse
 from dotenv import load_dotenv
 
 # parse arguments
+parser = argparse.ArgumentParser(description='OpenAI Codex CLI cheatsheet')
+parser.add_argument('-t', '--temp', default=0.0, type=float, help='Codex model temperature (randomness)')
+parser.add_argument('-n', '--num', default=1, type=int, help='Number of codex predictions to return')
+args = parser.parse_args()
+
+user_temp = args.temp
+user_num = args.num
+
 load_dotenv()
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
