@@ -2,11 +2,13 @@ import os
 import openai
 from dotenv import load_dotenv
 
+# parse arguments
 load_dotenv()
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
+# read prompt file
 
-user_query = input("Query? ")
+# get user query
 
 response = openai.Completion.create(
   model="code-davinci-002",
@@ -23,3 +25,4 @@ response = openai.Completion.create(
 
 cheat_answer = response["choices"][0]["text"]
 print(cheat_answer)
+  # make user_num bold and red
