@@ -27,11 +27,15 @@ response = openai.Completion.create(
   top_p=1,
   frequency_penalty=0,
   presence_penalty=0,
-  stop=["Query", "\n"]
+  stop=["Query", "\n"],
+  n=user_num,
 )
 
-# print response
-
-cheat_answer = response["choices"][0]["text"]
-print(cheat_answer)
+if user_num == 1:
+  cheat_answer = response["choices"][0]["text"].strip()
+  print(cheat_answer)
+else:
+  cheat_answer = "\n".join([choice["text"].strip() for choice in response["choices"]])
   # make user_num bold and red
+  user_num = "\033[1;31m" + str(user_num) + "\033[0m"
+  print(f"You generated {user_num} completions with temperature {str(user_temp)}: \n{cheat_answer}")
