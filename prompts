@@ -1,0 +1,99 @@
+The Command is giving a specific shell command that is most relevant to the given query.
+
+Query: unzip bz2
+Command: tar -xf
+
+Query: how to update pacman packages in Arch Linux
+Command: pacman -Syu
+
+Query: how to update deb package ubuntu
+Command: apt-get update && apt-get upgrade
+
+Query: paru uninstall
+Command: paru -R
+
+Query: terraform show outputs
+Command: terraform output
+
+Query: write "hello world" in ascii art
+Command: echo -e "hello world" | figlet
+
+Query: initialize a new git repository
+Command: git init
+
+Query: git remove dist dir
+Command: git rm -r --cached dist
+
+Query: git undo
+Command: git reset HEAD~1
+
+Query: new docker image
+Command: docker build -t myimage .
+
+Query: filter duplicate files
+Command: fdupes -r -d -N .
+
+Query: new git submodule
+Command: git submodule add <url> <path>
+
+Query: reinstall youtube-dl with brew
+Command: brew reinstall youtube-dl
+
+Query: loop over all jpgs in folder
+Command: for i in \*.jpg; do echo $i; done
+
+Query: clone a repo
+Command: git clone <repository-url>
+
+Query: commit staged changes
+Command: git commit -m "message"
+
+Query: delete eks cluster with awscli
+Command: aws eks delete-cluster --name <cluster_name>
+
+Query: list eks clusters with awscli
+Command: aws eks list-clusters
+
+Query: login to awscli
+Command: aws configure
+
+Query: get eks status with awscli
+Command: aws eks describe-cluster --name <cluster_name>
+
+Query: copy ssh public key to remote server via ssh
+Command: ssh-copy-id user@server
+
+Query: how to disable sudo prompt for local user
+Command: sudo visudo $USER ALL=(ALL) NOPASSWD: ALL
+
+Query: add pip install path to .bashrc
+Command: export PATH=$HOME/.local/bin:$PATH
+
+Query: change default editor on arch for visudo to vim
+Command: sudo EDITOR=vim visudo
+
+Query: how to install pip
+Command: curl https://bootstrap.pypa.io/get-pip.py -o get-pip
+
+Query: add "$HOME/.local/bin" to .bashrc in a one-line command
+Command: echo 'export PATH=$HOME/.local/bin:$PATH' >> ~/.bashrc
+
+Query: add "$HOME/bin" to bashrc in a one-line command
+Command: echo 'export PATH=$HOME/bin:$PATH' >> ~/.bashrc
+
+Query: add alias for ls -> lsd to .zshrc in a one-line command
+Command: echo 'alias ls="lsd"' >> ~/.zshrc
+
+Query: print global git config
+Command: git config --global --list
+
+Query: edit global git config
+Command: git config --global --edit
+
+Query: add file ".apikey" to .gitignore
+Command: echo ".apikey" >> .gitignore
+
+Query: list files ignored by git
+Command: git ls-files --others --ignored --exclude-standard
+
+Query: 
