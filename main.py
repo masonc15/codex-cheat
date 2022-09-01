@@ -18,6 +18,15 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # read prompt file
 prompt_file = "prompts"
+
+
+# optional debugging function
+def get_wordcount(prompt_file):
+  wordcount = 0
+  for line in f:
+    word_count += len(line.split())
+  return wordcount
+
 prompt_input = "".join(open(prompt_file))
 
 # get user query
