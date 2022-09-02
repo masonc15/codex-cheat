@@ -22,12 +22,20 @@ prompt_file = "prompts"
 
 # optional debugging function
 def get_wordcount(prompt_file):
-  wordcount = 0
-  for line in f:
-    word_count += len(line.split())
-  return wordcount
+  # get count of individual words in prompt file
+  with open(prompt_file) as f:
+    content = f.readlines()
+  content = [x.strip() for x in content]
+  # remove empty values from list
+  content = [x for x in content if x]
+  # convert each value of list to number of words in string
+  content = [len(x.split()) for x in content]
+  # sum up all values in list
+  return sum(content)
 
-prompt_input = "".join(open(prompt_file))
+print(get_wordcount(prompt_file))
+
+get_wordcount(prompt_file)
 
 # get user query
 user_query = input("Query: ")
