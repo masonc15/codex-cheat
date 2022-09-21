@@ -1,5 +1,8 @@
 # codex.sh
 CLI implementation of Codex for explaining shell commands
+
+>**Note:** This script requires a valid OpenAI API key with access to the Codex (`code-davinci-002`) model.
+
 ## Build Instructions
 
 ### Build from source
