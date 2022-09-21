@@ -11,9 +11,9 @@ CLI implementation of Codex for explaining shell commands
 2. Install dependencies
     - `pip install -r requirements.txt`
 3. Build the package
-    - `python setup.py build`
+    - `python -m build`
 4. Install the package
-    - `python setup.py install`
+    - `pip install dist/codex.sh-0.1-py3-none-any.whl`
 5. Set up your API key
     - `echo "OPENAI_API_KEY=your_key_here" > .env`
 6. Run the package
