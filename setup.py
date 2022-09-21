@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(
-    name="codex-cli",
+    name="codex.sh",
     version="0.1",
     py_modules=["main"],
     install_requires=[
