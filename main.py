@@ -1,15 +1,23 @@
 import os
 import openai
 import argparse
-from dotenv import load_dotenv
 from rich.console import Console
 import pyperclip
 
 def main():
 
     console = Console()
-    copy_prompt = False
 
+
+    
+    # check if API key is set
+    if os.environ.get("OPENAI_API_KEY") is None:
+        console.print("Please set your API key in the environment variable OPENAI_API_KEY")
+        exit(1)
+    
+    openai.api_key = os.getenv("OPENAI_API_KEY")
+    
+    
     # parse arguments
     parser = argparse.ArgumentParser(description="OpenAI Codex CLI cheatsheet")
 
@@ -47,9 +55,6 @@ def main():
         )
         exit()
 
-    # load API key from .env file
-    load_dotenv()
-    openai.api_key = os.getenv("OPENAI_API_KEY")
 
     # read prompt file
     prompt_file = "prompts"
