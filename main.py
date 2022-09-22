@@ -9,15 +9,15 @@ def main():
     console = Console()
 
 
-    
+
     # check if API key is set
     if os.environ.get("OPENAI_API_KEY") is None:
         console.print("Please set your API key in the environment variable OPENAI_API_KEY")
         exit(1)
-    
+
     openai.api_key = os.getenv("OPENAI_API_KEY")
-    
-    
+
+
     # parse arguments
     parser = argparse.ArgumentParser(description="OpenAI Codex CLI cheatsheet")
 
