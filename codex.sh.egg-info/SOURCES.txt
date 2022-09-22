@@ -1,3 +1,5 @@
+LICENSE
+README.md
 main.py
 setup.py
 codex.sh.egg-info/PKG-INFO
