@@ -11,5 +11,6 @@ setup(
         "python-dotenv",
         "argparse",
     ],
-    entry_points={"console_scripts": ["codex=main:main"]},
+    data_files=[("prompts.txt", ["prompts.txt"])],
+    entry_points={"console_scripts": ["codex=main:main"]}
 )
