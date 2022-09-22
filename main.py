@@ -99,7 +99,12 @@ def main():
             console.print(
                 "[green]" + response["choices"][0]["text"].strip()
             )
-            pyperclip.copy(response["choices"][0]["text"].strip())
+
+            # copy response to clipboard unless user is using SSH
+            if os.getenv("SSH_CLIENT") is None:
+                pyperclip.copy(response["choices"][0]["text"].strip())
+            else:
+                console.print("SSH detected, not copying to clipboard.")
         else:
             cheat_answer = "\n".join(
                 [choice["text"].strip() for choice in response["choices"]]
@@ -114,7 +119,6 @@ def main():
             # exit context manager
             status.stop()
             #console.print(f"[green]{cheat_answer}")
-            # copy_prompt = True
             user_input = console.input("Which one do you want to copy? [Enter line number] ")
             pyperclip.copy(response["choices"][int(user_input) - 1]["text"].strip())
 
