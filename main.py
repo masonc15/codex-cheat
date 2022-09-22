@@ -56,14 +56,13 @@ def main():
         exit()
 
 
-    # read prompt file
-    prompt_file = "prompts"
+    prompt_filepath = os.path.join(os.path.dirname(os.path.realpath(__file__)), "prompts.txt")
 
 
     # optional debugging function
-    def get_wordcount(prompt_file):
+    def get_wordcount(prompt_filepath):
         # get count of individual words in prompt file
-        with open(prompt_file) as f:
+        with open(prompt_filepath) as f:
             content = f.readlines()
         content = [x.strip() for x in content]
         # remove empty values from list
@@ -75,9 +74,9 @@ def main():
 
 
     if args.wordcount:
-        console.print(f"Word count: {get_wordcount(prompt_file)}")
+        console.print(f"Word count: {get_wordcount(prompt_filepath)}")
 
-    prompt_input = "".join(open(prompt_file))
+    prompt_input = "".join(open(prompt_filepath))
     user_query = " ".join(args.query)
 
     with console.status(
