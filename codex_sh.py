@@ -2,21 +2,20 @@ import os
 import openai
 import argparse
 from rich.console import Console
-import pyperclip
+
 
 def main():
 
     console = Console()
 
-
-
     # check if API key is set
     if os.environ.get("OPENAI_API_KEY") is None:
-        console.print("Please set your API key in the environment variable OPENAI_API_KEY")
+        console.print(
+            "Please set your API key in the environment variable OPENAI_API_KEY"
+        )
         exit(1)
 
     openai.api_key = os.getenv("OPENAI_API_KEY")
-
 
     # parse arguments
     parser = argparse.ArgumentParser(description="OpenAI Codex CLI cheatsheet")
@@ -24,12 +23,16 @@ def main():
     # add mandatory argument for input query
     parser.add_argument("query", nargs="+", help="query to search for")
 
-    parser.add_argument(
-        "-t", "--temp", default=0.0, type=float, help="Codex model temperature (randomness)"
-    )
-    parser.add_argument(
-        "-n", "--num", default=1, type=int, help="Number of codex predictions to return"
-    )
+    parser.add_argument("-t",
+                        "--temp",
+                        default=0.0,
+                        type=float,
+                        help="Codex model temperature (randomness)")
+    parser.add_argument("-n",
+                        "--num",
+                        default=1,
+                        type=int,
+                        help="Number of codex predictions to return")
     # add argument for printing prompt file word count
     parser.add_argument(
         "-w",
@@ -55,9 +58,8 @@ def main():
         )
         exit()
 
-
-    prompt_filepath = os.path.join(os.path.dirname(os.path.realpath(__file__)), "prompts.txt")
-
+    prompt_filepath = os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                   "prompts.txt")
 
     # optional debugging function
     def get_wordcount(prompt_filepath):
@@ -72,7 +74,6 @@ def main():
         # sum up all values in list
         return sum(content)
 
-
     if args.wordcount:
         console.print(f"Word count: {get_wordcount(prompt_filepath)}")
 
@@ -80,7 +81,7 @@ def main():
     user_query = " ".join(args.query)
 
     with console.status(
-        "[bold green]Generating response..."
+            "[bold green]Generating response..."
     ) as status:  # show loading message while generating completion
         response = openai.Completion.create(
             model="code-davinci-002",
@@ -89,39 +90,25 @@ def main():
             max_tokens=250,
             frequency_penalty=0,
             presence_penalty=0,
-            stop=["Query", "\n"],
+            stop=["Query"],
             n=user_num,
         )
 
         if user_num == 1:
             # print same response but in blue italic
-            console.print(
-                "[green]" + response["choices"][0]["text"].strip()
-            )
-
-            # copy response to clipboard unless user is using SSH
-            if os.getenv("SSH_CLIENT") is None:
-                pyperclip.copy(response["choices"][0]["text"].strip())
-            else:
-                console.print("SSH detected, not copying to clipboard.")
+            console.print("[green]" + response["choices"][0]["text"].strip())
         else:
             cheat_answer = "\n".join(
-                [choice["text"].strip() for choice in response["choices"]]
-            )
+                [choice["text"].strip() for choice in response["choices"]])
             console.print(
                 f"Here are [bold red]{user_num}[/bold red] completions with temperature set to [bold red]{user_temp}[/bold red]:"
             )
             # print cheat answers with numbers for each entry
             for i, answer in enumerate(cheat_answer.splitlines()):
                 console.print(f"[bold red]{i + 1}[/bold red]: [green]{answer}")
-
             # exit context manager
             status.stop()
-            #console.print(f"[green]{cheat_answer}")
-            user_input = console.input("Which one do you want to copy? [Enter line number] ")
-            pyperclip.copy(response["choices"][int(user_input) - 1]["text"].strip())
 
-    console.print("[italic light_slate_grey]Copied to clipboard.")
 
 if __name__ == "__main__":
     main()
